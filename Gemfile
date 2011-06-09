@@ -1,12 +1,31 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.7'
+gem 'rails' 
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
 gem 'haml'
+gem 'formtastic'
+gem 'will_paginate'
+gem 'jquery-rails'
+gem 'devise'
+
+group :testing do
+  gem "rspec"
+  gem "rspec-rails"
+  gem "autotest-standalone"
+  gem "autotest-rails"
+  gem "autotest-growl"
+  gem "mocha"
+  gem "shoulda"
+  gem "factory_girl_rails"
+end
+
+group :development do
+  gem "cheat"
+end
 
 # Use unicorn as the web server
 # gem 'unicorn'
