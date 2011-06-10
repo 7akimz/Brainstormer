@@ -1,0 +1,8 @@
+= form_for(@team) do |f|
+  %fieldset.new
+    %legend Update Team
+
+    = render 'form', :f => f
+
+    .actions
+      = f.submit 'Update'

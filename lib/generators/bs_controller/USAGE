@@ -1,0 +1,10 @@
+Description:
+   This will create a controller with a default action, you can 
+   specify your actions as argument
+
+Example:
+    rails generate bs_controller ControllerName
+
+    This will create:
+       app/controllers/name_controller
+       app/views/actions

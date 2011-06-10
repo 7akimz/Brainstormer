@@ -1,12 +1,7 @@
 Brainstormer::Application.routes.draw do
 
   devise_for :users
-
-  namespace "admin" do
-    root :to => "index#static"
-    resources :projects
-  end
-  
+  resources :teams
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,8 @@
+= form_for(@team, :remote => true) do |f|
+  %fieldset.new
+    %legend Team Registration 
+
+    = render 'form', :f => f
+
+    .actions
+      = f.submit "Create Team"

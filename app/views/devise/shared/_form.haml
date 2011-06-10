@@ -1,0 +1,46 @@
+= f.label :role
+%br
+= f.collection_select :role,            |
+  User.collection_name_options("role"), |
+  :first, :last                         |
+%br
+= f.label :name
+%br
+= f.text_field :name
+%br
+= f.label :email
+%br
+= f.email_field :email
+%br
+= f.label :username
+%br
+= f.text_field :username
+%br
+= f.label :password
+%br
+= f.password_field :password
+%br
+= f.label :password_confirmation
+%br
+= f.password_field :password_confirmation
+%br
+= f.label :mobile_number
+%br
+= f.text_field :mobile_number
+%br
+= f.label :address
+%br
+= f.text_field :address
+%br
+= f.label :spoken_language
+%br
+= f.collection_select :spoken_language,     |
+  User.collection_name_options("language"), |
+  :first, :last                             |
+%br
+= f.label :country
+%br
+= f.collection_select :country,            |
+  User.collection_name_options("country"), |
+  :first, :last                            |
+

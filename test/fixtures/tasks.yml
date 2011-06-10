@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  project_id: 1
+  priority: 1
+  progress: 9.99
+  name: MyString
+  description: MyText
+  is_finished: false
+  due: 2011-06-09 03:03:13
+
+two:
+  project_id: 1
+  priority: 1
+  progress: 9.99
+  name: MyString
+  description: MyText
+  is_finished: false
+  due: 2011-06-09 03:03:13

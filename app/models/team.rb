@@ -1,0 +1,49 @@
+class Team < ActiveRecord::Base
+  # Team associations which link the Team model with the User model
+  has_many :members
+  has_many :users, :through => :members
+
+  # Team association which links the Team model 
+  # with the Project model
+  has_many :assignments
+  has_many :projects, :through => :assignments
+
+  # String values for the role instead of the integers values
+  TEAM_ROLE = {
+    0 => "Analyst Team",
+    1 => "Developer Team",
+    2 => "Mixed Team",
+    3 => "Software Engineer Team"
+  }
+
+  # Allow the attributes the will be mass assigned
+  attr_accessible :name, :role, :email
+
+  EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
+  # Validation for the name
+  validates :name,    :presence => true,
+                      :length => { :maximum => 30 },
+                      :uniqueness => true
+
+  # Validation for the role
+  validates :role,    :presence => true,
+                      :inclusion => { :in => 0..3 }
+
+  # Validation for the email
+  validates :email,   :presence => true,
+                      :format       => { :with => EMAIL_REGEX },
+                      :uniqueness   => { :case_sensitive => false }
+
+  # Get the corresponding string value of the integer value of the 
+  # role
+  def team_role
+    TEAM_ROLE[role]
+  end
+  
+  # Convert the dobule paired values of the roles into array
+  # and sort them to be used as a data in the drop down list
+  def self.role_name_options
+    TEAM_ROLE.to_a.sort
+  end
+end

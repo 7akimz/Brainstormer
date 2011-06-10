@@ -7,10 +7,10 @@ gem 'rails'
 
 gem 'sqlite3'
 gem 'haml'
-gem 'formtastic'
 gem 'will_paginate'
 gem 'jquery-rails'
 gem 'devise'
+gem 'faye'
 
 group :testing do
   gem "rspec"
@@ -19,7 +19,7 @@ group :testing do
   gem "autotest-rails"
   gem "autotest-growl"
   gem "mocha"
-  gem "shoulda"
+  #gem "shoulda"
   gem "factory_girl_rails"
 end
 

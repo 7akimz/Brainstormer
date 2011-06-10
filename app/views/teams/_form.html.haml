@@ -1,0 +1,14 @@
+.field
+  = f.label :role
+  %br
+  = f.collection_select :role, |
+    Team.role_name_options,    |
+    :first, :last              |
+  %br
+  = f.label :name
+  %br
+  = f.text_field :name
+  %br
+  = f.label :email
+  %br
+  = f.email_field :email
