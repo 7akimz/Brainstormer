@@ -13,6 +13,8 @@ class CreateProjects < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :projects, :client_id
+    add_index :projects, :name, :unique => true
   end
 
   def self.down

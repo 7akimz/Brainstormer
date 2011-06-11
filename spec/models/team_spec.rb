@@ -8,12 +8,16 @@ describe Team do
                     :email => "blue_team@example.com" }
   end
   context "Add new Team" do
-    it 'should create a new team given valid attributes' do
-      Team.create!(@attributes)
-    end
 
     it 'should create a new team and associate it with user' do
       @user.teams.create!(@attributes) 
+    end
+
+    it 'should have a user associated with it' do
+      team = Team.new(@attributes)
+      team.users.each do |user|
+        user.should_not be_nil
+      end
     end
 
     it 'should require a name' do

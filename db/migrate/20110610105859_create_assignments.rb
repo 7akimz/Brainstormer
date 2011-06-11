@@ -7,6 +7,8 @@ class CreateAssignments < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :assignments, :team_id
+    add_index :assignments, :project_id
   end
 
   def self.down

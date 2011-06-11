@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   
   has_many :members
   has_many :teams, :through => :members
+  
+  has_many :posts, :dependent => :destroy
 
   USER_ROLE = {
     0 => "Manager",
@@ -35,7 +37,7 @@ class User < ActiveRecord::Base
     :remember_me, :name, :address, :role, :username, :mobile_number,
     :spoken_language, :country
 
-  # User validations
+  # Setup user validations for the model
   validates :name,             :presence => true,
                                :length => { :maximum => 50 }
 

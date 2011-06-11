@@ -123,13 +123,14 @@ describe User do
       user.should_not be_valid
     end
   end
+
   context "admin" do
     before(:each) do
-      @admin = User.create!(@user)
+      @admin = Factory(:user)
     end
 
     it 'should respond to admin' do
-      @admin.should respond_to(:admin) 
+      @admin.should respond_to(:admin)
     end
 
     it 'should not be admin by default' do
@@ -139,6 +140,32 @@ describe User do
     it 'should be toggled to admin' do
       @admin.toggle!(:admin)
       @admin.should be_admin
+    end
+  end
+
+  context "Post associations" do
+
+    before(:each) do
+      @user = Factory(:user)
+      @first_post = Factory(:post, :user => @user,
+                            :created_at => 2.day.ago)
+      @second_post = Factory(:post, :user => @user, 
+                             :created_at => 1.day.ago)
+    end
+  
+    it 'should have a post attribute' do
+      @user.should respond_to(:posts)
+    end
+    
+    it 'should have posts in order' do
+      @user.posts.should == [@second_post, @first_post]
+    end
+
+    it 'should destroy associated post' do
+      @user.destroy
+      [@second_post, @first_post].each do |post|
+        Post.find_by_id(post.id).should be_nil
+      end
     end
   end
 end

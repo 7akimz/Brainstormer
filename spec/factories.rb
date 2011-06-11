@@ -54,3 +54,8 @@ Factory.define :assignment do |a|
   a.association :team
   a.association :project
 end
+
+Factory.define :post do |p|
+  p.content     "Lorem example content preloaded in the...."
+  p.association :user
+end

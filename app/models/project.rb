@@ -8,5 +8,7 @@ class Project < ActiveRecord::Base
   # Project assoication with the Team model through the join table
   # assignments
   has_many :assignments
-  has_many :teams, :through => assignments
+  has_many :teams, :through => :assignments
+
+  # todo: Setup accessible (or protected) attributes for your model
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110610105859) do
+ActiveRecord::Schema.define(:version => 20110610163936) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "team_id"
@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(:version => 20110610105859) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "assignments", ["project_id"], :name => "index_assignments_on_project_id"
+  add_index "assignments", ["team_id"], :name => "index_assignments_on_team_id"
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -37,6 +40,18 @@ ActiveRecord::Schema.define(:version => 20110610105859) do
     t.datetime "updated_at"
   end
 
+  add_index "members", ["team_id"], :name => "index_members_on_team_id"
+  add_index "members", ["user_id"], :name => "index_members_on_user_id"
+
+  create_table "posts", :force => true do |t|
+    t.string   "content"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.string   "location"
@@ -50,6 +65,9 @@ ActiveRecord::Schema.define(:version => 20110610105859) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "projects", ["client_id"], :name => "index_projects_on_client_id"
+  add_index "projects", ["name"], :name => "index_projects_on_name", :unique => true
 
   create_table "tasks", :force => true do |t|
     t.integer  "project_id"
@@ -71,6 +89,8 @@ ActiveRecord::Schema.define(:version => 20110610105859) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "teams", ["name"], :name => "index_teams_on_name", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "",    :null => false

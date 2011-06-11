@@ -6,6 +6,8 @@ class CreateMembers < ActiveRecord::Migration
       t.boolean   :accepted, :default => false
       t.timestamps
     end
+    add_index :members, :user_id
+    add_index :members, :team_id
   end
 
   def self.down

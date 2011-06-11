@@ -21,16 +21,16 @@ class Team < ActiveRecord::Base
 
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  # Validation for the name
+  # Setup validation for the name
   validates :name,    :presence => true,
                       :length => { :maximum => 30 },
                       :uniqueness => true
 
-  # Validation for the role
+  # Setup validation for the role
   validates :role,    :presence => true,
                       :inclusion => { :in => 0..3 }
 
-  # Validation for the email
+  # Setup validation for the email
   validates :email,   :presence => true,
                       :format       => { :with => EMAIL_REGEX },
                       :uniqueness   => { :case_sensitive => false }

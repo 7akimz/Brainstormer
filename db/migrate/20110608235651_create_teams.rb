@@ -7,6 +7,7 @@ class CreateTeams < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :teams, :name, :unique => true
   end
 
   def self.down
