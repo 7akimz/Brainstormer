@@ -1,0 +1,7 @@
+%li
+  %span.content= post.content
+  %span.time Posted #{time_ago_in_words(post.created_at)} ago.
+%li 
+  = link_to "delete", post, :method => :delete, |
+                            :confirm => "Are you sure?" |
+                            :title => post.content |

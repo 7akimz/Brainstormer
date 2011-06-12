@@ -1,0 +1,4 @@
+- unless @feed_items.empty?
+  %ul.posts
+    = render :partial => 'shared/feed_item', :collection => |
+    @feed_items |

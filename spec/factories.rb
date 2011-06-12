@@ -2,7 +2,9 @@ require 'active_support/all'
 
 Factory.define :user do |u|
   u.name            "mohamed"
-  u.username        "mohamed"
+  u.sequence :username do |n|
+    "user#{n}"
+  end
   u.sequence :email do |e|
     "user#{e}@test.com"
   end

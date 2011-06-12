@@ -1,0 +1,13 @@
+- if user_signed_in?
+  .main
+    %h1.post Any new idea?
+    = render 'shared/post_form'
+    = render 'shared/feed'
+  .side
+    = render 'shared/user_info'
+- else
+  %h1 Welcome to Brainstormer
+
+  %p Enjoy the social website
+
+  = link_to "Sign up!", new_user_registration_path

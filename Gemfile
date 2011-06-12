@@ -7,10 +7,12 @@ gem 'rails'
 
 gem 'sqlite3'
 gem 'haml'
-gem 'will_paginate'
 gem 'jquery-rails'
 gem 'devise'
 gem 'faye'
+gem 'carrierwave'
+gem 'rmagick'
+# gem 'will_paginate'
 
 group :testing do
   gem "rspec"
@@ -18,8 +20,8 @@ group :testing do
   gem "autotest-standalone"
   gem "autotest-rails"
   gem "autotest-growl"
-  gem "mocha"
-  #gem "shoulda"
+  # gem "mocha"
+  # gem "shoulda"
   gem "factory_girl_rails"
 end
 

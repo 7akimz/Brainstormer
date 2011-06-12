@@ -1,8 +1,6 @@
-= f.label :role
+= f.label :image
+= f.file_field :image
 %br
-= f.collection_select :role,            |
-  User.collection_name_options("role"), |
-  :first, :last                         |
 %br
 = f.label :name
 %br
@@ -43,4 +41,9 @@
 = f.collection_select :country,            |
   User.collection_name_options("country"), |
   :first, :last                            |
-
+%br
+= f.label :role
+%br
+= f.collection_select :role,            |
+  User.collection_name_options("role"), |
+  :first, :last                         |

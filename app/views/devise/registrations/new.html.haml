@@ -1,6 +1,7 @@
 %h2 Sign up
 = form_for(resource, :as => resource_name, :url => |
-  registration_path(resource_name)) do |f|         |
+  registration_path(resource_name), :html => |
+  {:multipart => true}) do |f|  |
   = devise_error_messages!
   .field
     = render :partial => "devise/shared/form", :locals => { :f => f } 

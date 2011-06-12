@@ -12,13 +12,21 @@
     - unless alert.blank?
       .alert
         = alert
-    %nav
-      %ul
-        %li=link_to "Projects"
-        %li=link_to "tobe"
-        - if user_signed_in?
-          %li=link_to "Logout", destory_user_session_path
-        - else
-          %li=link_to "Login", new_user_session_path
-    = yield
+    %section
+      %header
+        %nav
+          %ul
+            - if user_signed_in?
+              %li=link_to_unless_current "Teams"
+              %li=link_to_unless_current "Edit profile", |
+              edit_user_registration_path
+              %li=link_to_unless_current "Logout", |
+              destroy_user_session_path
+            - else
+              %li=link_to_unless_current "Login", new_user_session_path
+              %li=link_to_unless_current "Signup", |
+              new_user_registration_path
+      %article
+        = yield
+      %footer
 

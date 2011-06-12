@@ -41,8 +41,8 @@ describe User do
     end
 
     it 'should have unique username' do
-      Factory(:user, :email => "example@foo.com")
-      user = Factory.build(:user) 
+      Factory(:user, :username => "looool")
+      user = Factory.build(:user, :username => "looool") 
       user.should_not be_valid
     end
 
@@ -166,6 +166,29 @@ describe User do
       [@second_post, @first_post].each do |post|
         Post.find_by_id(post.id).should be_nil
       end
+    end
+
+    context "feed" do
+    
+      it 'should have a feed' do
+        @user.should respond_to(:feed)
+      end
+
+      it 'should include the posts' do
+        @user.feed.include?(@first_post).should be_true
+        @user.feed.include?(@second_post).should be_true
+      end
+
+      it 'should not include wrong posts' do
+        post = Factory(:post, 
+                       :user => Factory(:user, :email => 
+                                          "figure@fig.com",
+                                        :username => 
+                                          "newname"))
+        @user.feed.include?(post).should be_false
+
+      end
+    
     end
   end
 end

@@ -1,0 +1,5 @@
+.user_image
+  = carrierwave_tag(@user, true)
+- unless @user.posts.empty?
+  %ul.posts #{render @posts}
+  

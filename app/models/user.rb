@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   
   has_many :posts, :dependent => :destroy
 
+  mount_uploader :image, ImageUploader
+
   USER_ROLE = {
     0 => "Manager",
     1 => "Team Leader",
@@ -35,7 +37,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation,
     :remember_me, :name, :address, :role, :username, :mobile_number,
-    :spoken_language, :country
+    :spoken_language, :country, :image
 
   # Setup user validations for the model
   validates :name,             :presence => true,
@@ -84,6 +86,11 @@ class User < ActiveRecord::Base
     elsif collection == "language"
       USER_LANGUAGE.to_a.sort
     end
+  end
+ 
+  # Find all the post where id match the given user id
+  def feed
+    Post.where("user_id = ?", id)
   end
 
 end
