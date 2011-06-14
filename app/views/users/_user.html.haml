@@ -1,0 +1,8 @@
+%li
+  = carrierwave_tag user
+  = link_to user.name, user
+  - if current_user.admin?
+    |
+    = if same_user?(user)
+      = link_to "delete", user, :confirm => "Are you sure?", :method => :delete, 
+                                :remote => true

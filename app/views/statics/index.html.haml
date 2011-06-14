@@ -1,10 +1,13 @@
 - if user_signed_in?
-  .main
-    %h1.post Any new idea?
-    = render 'shared/post_form'
-    = render 'shared/feed'
-  .side
-    = render 'shared/user_info'
+  %table.front
+    %tr
+      %td.main
+        %h1.post Any new idea?
+        = render 'shared/post_form'
+        = render 'shared/feed'
+        .sidebar
+          = render 'shared/user_info'
+          = render 'shared/status'
 - else
   %h1 Welcome to Brainstormer
 

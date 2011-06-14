@@ -37,4 +37,43 @@ describe Post do
     end
   
   end
+
+  context "from_users_followed_by" do
+
+    before(:each) do
+      @first_followed = Factory(:user, 
+                                :email => 
+                                "first_followed@example.com",
+                                :username => "first_followed")
+      @second_followed = Factory(:user, 
+                                 :email => 
+                                 "second_followed@example.com",
+                                 :username => "second_followed")
+      @user_post = @user.posts.create!(:content => "new post")
+      @first_post = @first_followed.posts.create(
+        :content => "first post")
+      @second_post = @second_followed.posts.create(
+        :content => "second post")
+      @user.follow!(@first_followed)
+    end
+
+    it 'should have a from_users_followed_by class method' do
+      Post.should respond_to(:from_users_followed_by)
+    end
+
+    it 'should include the followed users posts' do
+      Post.from_users_followed_by(@user).should include(
+        @first_post)
+    end
+
+    it 'should include the user post' do
+      Post.from_users_followed_by(@user).should include(@user_post)
+    end
+
+    it "should not include an unfollowed user's post" do
+      Post.from_users_followed_by(@user).should_not include(
+        @second_followed)
+    end
+  end
+
 end

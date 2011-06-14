@@ -5,14 +5,28 @@ class User < ActiveRecord::Base
   
   has_many :posts, :dependent => :destroy
 
+  has_many :relationships, :foreign_key => "follower_id", 
+    		           :dependent => :destroy
+
+  has_many :following, :through => :relationships, 
+	  	       :source => :followed
+
+  has_many :inverted_relationships, :foreign_key => "followed_id",
+				    :class_name => "Relationship",
+                                    :dependent => :destroy
+
+
+  has_many :followers, :through => :inverted_relationships,
+    		       :source => :follower
+
   mount_uploader :image, ImageUploader
 
   USER_ROLE = {
-    0 => "Manager",
-    1 => "Team Leader",
-    2 => "Developer",
-    3 => "Analyst",
-    4 => "Software Engineer"
+    0 => "Analyst",
+    1 => "Developer",
+    2 => "Manager",
+    3 => "Software Engineer",
+    4 => "Team Leader"
   }
 
   USER_COUNTRY = {
@@ -56,8 +70,12 @@ class User < ActiveRecord::Base
   validates :spoken_language,  :inclusion => { :in => 0..2 }
 
   validates :mobile_number,    :numericality => true,
-                               :length => { :minimum => 10 }
+                               :if => :mobile_present?
 
+  # Check if the mobile number is present
+  def mobile_present?
+    !mobile_number.nil?
+  end
   # get the role name which coressponds to a role number stored
   # in the database 
   def user_role
@@ -90,7 +108,22 @@ class User < ActiveRecord::Base
  
   # Find all the post where id match the given user id
   def feed
-    Post.where("user_id = ?", id)
+    Post.from_users_followed_by(self)
+  end
+
+  # Check if a user is following another one
+  def following?(followed)
+    self.relationships.find_by_followed_id(followed)
+  end
+
+  # Follow a User method
+  def follow!(followed)
+    self.relationships.create!(:followed_id => followed.id)
+  end
+
+  # Unfollow User method
+  def unfollow!(followed)
+    self.relationships.find_by_followed_id(followed).destroy
   end
 
 end

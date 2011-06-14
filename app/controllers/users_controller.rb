@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   respond_to :html, :js
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:show]
   
   def index
     @users = User.all
@@ -12,6 +12,18 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = @user.posts.all
     respond_with(@user)
+  end
+
+  def following
+    @user = User.find(params[:id])
+    @users = @user.following
+    render 'show_follow'
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.followers
+    render 'show_follow'
   end
   
 end

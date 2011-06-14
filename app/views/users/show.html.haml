@@ -1,5 +1,22 @@
-.user_image
-  = carrierwave_tag(@user, true)
-- unless @user.posts.empty?
-  %ul.posts #{render @posts}
-  
+%table.profile
+  %td.main
+    %h1
+      = carrierwave_tag(@user)
+      = @user.name
+    - unless @user.posts.empty?
+      %table.posts 
+        = render @posts
+    = render 'follow_form' if user_signed_in? 
+  .sidebar
+    %strong
+      Name: 
+      = @user.name 
+    %br
+    %strong 
+      URI:
+      = link_to user_path(@user), @user
+    %br
+    %strong
+      Posts
+      = @user.posts.count
+    = render 'shared/status'

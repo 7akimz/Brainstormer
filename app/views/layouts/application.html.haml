@@ -2,31 +2,36 @@
 %html
   %head
     %title Brainstormer
-    = stylesheet_link_tag :all
+    = stylesheet_link_tag 'blueprint/screen', :media => 'screen' 
+    = stylesheet_link_tag 'blueprint/print', :media => 'print' 
+    <!-- [if lt IE 8]>= stylesheet_link_tag 'blueprint/ie' <! [endif]-->
+    = stylesheet_link_tag 'style', :media => 'screen'
     = javascript_include_tag :defaults
     = csrf_meta_tag
   %body
-    - unless notice.blank?
-      .notice
-        = notice
-    - unless alert.blank?
-      .alert
-        = alert
-    %section
-      %header
-        %nav
-          %ul
-            - if user_signed_in?
-              %li=link_to_unless_current "Teams"
-              %li=link_to_unless_current "Edit profile", |
-              edit_user_registration_path
-              %li=link_to_unless_current "Logout", |
-              destroy_user_session_path
-            - else
-              %li=link_to_unless_current "Login", new_user_session_path
-              %li=link_to_unless_current "Signup", |
-              new_user_registration_path
-      %article
-        = yield
-      %footer
+    .container
+      - unless notice.blank?
+        .notice
+          = notice
+      - unless alert.blank?
+        .alert
+          = alert
+      %section
+        %header
+          %nav
+            %ul
+              - if user_signed_in?
+                %li=link_to_unless_current "Teams"
+                %li=link_to_unless_current "Edit profile", |
+                edit_user_registration_path
+                %li=link_to_unless_current "Logout", |
+                destroy_user_session_path 
+              - else
+                %li=link_to_unless_current "Login", |
+                new_user_session_path 
+                %li=link_to_unless_current "Signup", |
+                new_user_registration_path 
+        %article
+          = yield
+        %footer
 

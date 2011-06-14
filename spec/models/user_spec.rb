@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe User do
   before(:each) do
-    @user = {
+    @attributes = {
       :name => "mohamed",
       :username => "mohamed",
       :email => "mohamed@test.com",
       :password => "mmmmmm",
-      :address => "naser city",
+      :address => "nasr city",
       :country => 1,
       :role => 2,
       :mobile_number => "0111351995",
@@ -16,7 +16,7 @@ describe User do
   end
   context "Adding a User" do
     it 'should create new user given valid inputs' do
-      user = User.create!(@user)
+      user = User.create!(@attributes)
       user.should be_valid
     end
 
@@ -84,12 +84,6 @@ describe User do
 
     it 'should required mobile_numbers to be numeric' do
       number = 'm' * 10
-      user = Factory.build(:user, :mobile_number => number)
-      user.should_not be_valid
-    end
-
-    it 'should not allow short mobile nubmers' do
-      number = 000000000
       user = Factory.build(:user, :mobile_number => number)
       user.should_not be_valid
     end
@@ -185,10 +179,72 @@ describe User do
                                           "figure@fig.com",
                                         :username => 
                                           "newname"))
-        @user.feed.include?(post).should be_false
+        @user.feed.should_not include(post)
+      end
 
+      it 'should include posts of the followed users' do
+        followed_user = Factory(:user, :email => 
+                                        "followed_user@example.com",
+                           :username => "followed_user")
+        post = Factory(:post, :user => followed_user)
+        @user.follow!(followed_user)
+        @user.feed.should include(post)
       end
     
     end
   end
+
+	context "relationships" do
+					
+		before(:each) do
+			@user = User.create!(@attributes)
+			@followed = Factory(:user)
+		end
+
+		it "should have a relatonships attribute" do
+			@user.should respond_to(:relationships)
+		end
+
+		it "should have a following? method" do
+			@user.should respond_to(:following?)
+		end
+
+		it "should have a follow! method" do
+			@user.should respond_to(:follow!)
+		end
+
+		it "should be able to follow another user" do
+			@user.follow!(@followed)
+			@user.should be_following(@followed)
+		end
+
+		it "should include the followed user in following array" do
+			@user.follow!(@followed)
+			@user.following.should include(@followed)
+		end
+
+		it "should have unfollow! method" do
+			@followed.should respond_to(:unfollow!)
+		end
+
+		it "should unfollow a user" do
+			@user.follow!(@followed)
+			@user.unfollow!(@followed)
+			@user.should_not be_following(@followed)
+		end
+
+		it "should have a inverted_relationships" do
+			@user.should respond_to(:inverted_relationships)
+		end
+
+		it "should have a followers method" do
+			@user.should respond_to(:followers)
+		end
+
+		it "should include the follower in the followers array" do
+			@user.follow!(@followed)
+			@followed.followers.should include(@user)
+		end
+
+	end
 end

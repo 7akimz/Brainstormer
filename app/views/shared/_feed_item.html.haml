@@ -1,15 +1,18 @@
-.user_image
-  %li.user_image
-    = link_to carrierwave_tag(feed_item.user, true), |
+%tr
+  %td.user_image
+    = link_to carrierwave_tag(feed_item.user), |
     feed_item.user |
-  %li.post
+  %td.post
     %span.user
       = link_to feed_item.user.name, feed_item.user
     %span.content
       = feed_item.content
-    %span.time Posted #{ time_ago_in_words(feed_item.created_at)} ago.
-    - if verfiy_user? feed_item.user
-      %li
+    %span.timestamp 
+      Posted 
+      = time_ago_in_words(feed_item.created_at)
+      ago.
+    - if same_user? feed_item.user
+      %td
         = link_to "delete", feed_item, | 
         :method => :delete, |
         :confirm => "Are you sure?", |

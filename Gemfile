@@ -27,6 +27,8 @@ end
 
 group :development do
   gem "cheat"
+  gem "annotate-models"
+  gem "faker"
 end
 
 # Use unicorn as the web server

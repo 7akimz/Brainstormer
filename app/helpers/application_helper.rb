@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-  def verfiy_user?(user)
+  def same_user?(user)
     current_user == user
   end
 

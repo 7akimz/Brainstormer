@@ -1,0 +1,13 @@
+- @user ||= current_user
+.status
+  %table
+    %tr
+      %td
+        %a(href="#{following_user_path(@user)}")
+          %span#following.status
+            = @user.following.count
+            following
+      %td
+        %a(href="#{followers_user_path(@user)}")
+          %span#followers.status
+            = pluralize(@user.followers.count, "followers")
