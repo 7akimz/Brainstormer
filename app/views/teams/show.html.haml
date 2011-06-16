@@ -1,14 +1,17 @@
 %h1 
   = @team.name
-.show
-  %strong
-    Name:
-    = @team.name
-  %br
-  %strong
-    Role:
-    = @team.team_role
-  %strong
-    E-mail:
-    = @team.email
+%table.profile
+  %td.main
+    %strong
+      Name:
+      = @team.name
+    %br
+    %strong
+      Role:
+      = @team.team_role
+    %br
+    %strong
+      E-mail:
+      = @team.email
+    = render 'join_form' if user_signed_in?
 

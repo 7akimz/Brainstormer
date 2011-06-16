@@ -1,15 +1,19 @@
 Brainstormer::Application.routes.draw do
 
   devise_for :users
-
+  match 'users/my_teams' => "users#my_teams",
+    :as => :myteams
   resources :users, :only => [:show, :index]
   resources :users do
      member do
        get :following, :followers
      end
   end
+
   resources :posts, :only => [:create, :destroy]
   resources :relationships, :only => [:create, :destroy]
+  resources :members, :only => [:create, :destroy]
+  resources :assignments, :only => [:create, :destroy]
   resources :teams
   resources :projects
 

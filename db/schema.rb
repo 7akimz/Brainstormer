@@ -10,12 +10,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110612221221) do
+ActiveRecord::Schema.define(:version => 20110615162531) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "team_id"
     t.integer  "project_id"
-    t.boolean  "assigned",   :default => false
+    t.boolean  "assigned",    :default => false
+    t.string   "assigned_by"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -32,14 +33,30 @@ ActiveRecord::Schema.define(:version => 20110612221221) do
     t.datetime "updated_at"
   end
 
-  create_table "members", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "team_id"
-    t.boolean  "accepted",   :default => false
+  create_table "companies", :force => true do |t|
+    t.string   "name"
+    t.string   "telephone"
+    t.string   "fax"
+    t.string   "email"
+    t.integer  "country"
+    t.string   "address"
+    t.integer  "employees_number"
+    t.decimal  "capital",          :default => 5000.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "companies", ["name"], :name => "index_companies_on_name", :unique => true
+
+  create_table "members", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "team_id"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "members", ["company_id"], :name => "index_members_on_company_id"
   add_index "members", ["team_id"], :name => "index_members_on_team_id"
   add_index "members", ["user_id"], :name => "index_members_on_user_id"
 
@@ -54,7 +71,7 @@ ActiveRecord::Schema.define(:version => 20110612221221) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.string   "location"
+    t.string   "address"
     t.integer  "client_id"
     t.text     "description"
     t.decimal  "budget",      :default => 100.0

@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   
-  has_many :members
-  has_many :teams, :through => :members
+  has_many :members, :dependent => :destroy
+  has_many :teams, :through => :members, :uniq => true
   
   has_many :posts, :dependent => :destroy
 
@@ -71,7 +71,8 @@ class User < ActiveRecord::Base
 
   validates :mobile_number,    :numericality => true,
                                :if => :mobile_present?
-
+  
+  scope :privileged, where(:role => "2", :role => "4")
   # Check if the mobile number is present
   def mobile_present?
     !mobile_number.nil?
@@ -124,6 +125,23 @@ class User < ActiveRecord::Base
   # Unfollow User method
   def unfollow!(followed)
     self.relationships.find_by_followed_id(followed).destroy
+  end
+
+  def is_member_of?(team)
+    Member.find_by_user_id_and_team_id(self.id, team.id)
+  end
+
+  def want_to_join!(team)
+    unless(Member.find_by_user_id_and_team_id(self.id, team.id))
+      self.teams << team
+    end
+  end
+
+  def want_to_leave!(team)
+    associate = Member.find_by_user_id_and_team_id(self.id, team)
+    if associate
+      self.teams.delete(team)
+    end
   end
 
 end

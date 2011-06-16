@@ -56,11 +56,13 @@ describe Team do
       team = Factory.build(:team, :name => long_name)
       team.should_not be_valid
     end
+
     it 'should not accept identical team names' do
       team = Team.create!(@attributes)
       identical_name_team = Team.new(@attributes)
       identical_name_team.should_not be_valid
     end
+
     it 'should not accept undefined roles' do
       team = Factory.build(:team, :role => 100)
       team.should_not be_valid

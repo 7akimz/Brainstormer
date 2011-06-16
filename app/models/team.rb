@@ -1,7 +1,7 @@
 class Team < ActiveRecord::Base
   # Team associations which link the Team model with the User model
-  has_many :members
-  has_many :users, :through => :members
+  has_many :members, :dependent => :destroy
+  has_many :users, :through => :members, :uniq => true
 
   # Team association which links the Team model 
   # with the Project model
@@ -46,4 +46,5 @@ class Team < ActiveRecord::Base
   def self.role_name_options
     TEAM_ROLE.to_a.sort
   end
+
 end

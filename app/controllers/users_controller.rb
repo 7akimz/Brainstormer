@@ -25,5 +25,10 @@ class UsersController < ApplicationController
     @users = @user.followers
     render 'show_follow'
   end
+
+  def my_teams
+    #@user = User.find(params[:id])
+    @teams = current_user.teams
+  end
   
 end

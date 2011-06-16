@@ -5,6 +5,8 @@ namespace :db do
   task :populate => :environment do
     Rake::Task['db:reset'].invoke
     fill_users
+    fill_posts
+    fill_relationships
   end
 end
 
@@ -51,7 +53,7 @@ end
 
 def fill_relationships
   users = User.all
-  user = user.first
+  user = User.first
   following = users[1..75]
   followers = users[5..25]
   following.each { |followed| user.follow!(followed) }

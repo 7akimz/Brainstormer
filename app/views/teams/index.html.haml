@@ -1,0 +1,8 @@
+%h1 List of Teams
+
+= render :partial => "team", :collection => @teams
+
+%br
+- unless privileged?(current_user)
+  = link_to 'New Team', new_team_path
+  = link_to 'Add Project', new_project_path

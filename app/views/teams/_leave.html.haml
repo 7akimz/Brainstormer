@@ -1,0 +1,3 @@
+= form_for current_user.members.find_by_team_id(@team), |
+:html => { :method => :delete }, :remote => true do |f| |
+  .actions= f.submit "Leave Team"

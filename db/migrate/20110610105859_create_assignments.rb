@@ -4,6 +4,7 @@ class CreateAssignments < ActiveRecord::Migration
       t.references :team
       t.references :project
       t.boolean    :assigned, :default => false
+      t.string     :assigned_by
 
       t.timestamps
     end

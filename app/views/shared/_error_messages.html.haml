@@ -1,0 +1,14 @@
+- unless object.errors.empty?
+  %fieldset#error_report
+    %legend Error
+    %h3  
+      = pluralize(object.errors.count, "error")
+      prevented 
+      = pluralize(object.errors, "this")
+      = object.class.to_s.underscore.humanize.downcase
+      from being saved:
+    %p 
+      The problems are assoicated with these fields:
+    %ul
+      - object.errors.full_messages.each do |msg|
+        %li= msg

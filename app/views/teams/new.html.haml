@@ -1,4 +1,5 @@
-= form_for(@team, :remote => true) do |f|
+= form_for(@team) do |f|
+  = render 'shared/error_messages', :object => f.object
   %fieldset.new
     %legend Team Registration 
 

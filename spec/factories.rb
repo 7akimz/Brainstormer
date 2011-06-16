@@ -11,10 +11,9 @@ Factory.define :user do |u|
   u.password        "mmmmmm"
   u.address         "nasr city"
   u.country         1
-  u.role            2
+  u.role            0
   u.mobile_number   "0111351995"
   u.spoken_language 1
-  #u.teams { |teams| [teams.association(:team)] }
 end
 
 Factory.define :team do |t|
@@ -23,8 +22,6 @@ Factory.define :team do |t|
   end
   t.role        0
   t.email       "black_team@example.com"
-  #t.users { |users| [users.association(:user)] }
-  #t.projects { |projects| [projects.association(:project)] }
 end
 
 Factory.define :client do |c|
@@ -37,14 +34,13 @@ end
 Factory.define :project do |p|
   p.name         "graduation"
   p.description  "an example of a description"
-  p.location     "Egypt"
+  p.address      "Egypt"
   p.budget       1000.0
   p.side_notes   "a side note example"
   p.finished     false
   p.start_date   1.week.ago
   p.due          Time.now
   p.association  :client
-  #p.teams { |teams| [teams.association(:team)] }
 end
 
 Factory.define :member do |m|

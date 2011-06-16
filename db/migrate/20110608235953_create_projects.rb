@@ -2,7 +2,7 @@ class CreateProjects < ActiveRecord::Migration
   def self.up
     create_table :projects do |t|
       t.string :name
-      t.string :location
+      t.string :address
       t.integer :client_id
       t.text :description
       t.decimal :budget, :default => 100.00

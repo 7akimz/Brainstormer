@@ -3,11 +3,13 @@ class CreateMembers < ActiveRecord::Migration
     create_table :members do |t|
       t.references :user
       t.references :team
-      t.boolean   :accepted, :default => false
+      t.references :company
+
       t.timestamps
     end
     add_index :members, :user_id
     add_index :members, :team_id
+    add_index :members, :company_id
   end
 
   def self.down

@@ -1,0 +1,5 @@
+#join_form
+  - unless current_user.is_member_of?(@team)
+    = render 'join'
+  - else
+    = render 'leave'

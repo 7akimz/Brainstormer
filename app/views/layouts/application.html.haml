@@ -21,7 +21,12 @@
           %nav
             %ul
               - if user_signed_in?
-                %li=link_to_unless_current "Teams"
+                %li=link_to_unless_current "Users",
+                users_path
+                %li=link_to_unless_current "Teams", |
+                teams_path
+                %li=link_to_unless_current "My Teams", |
+                myteams_path
                 %li=link_to_unless_current "Edit profile", |
                 edit_user_registration_path
                 %li=link_to_unless_current "Logout", |
