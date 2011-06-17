@@ -1,19 +1,30 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
-= form_for(resource, :as => resource_name, :url => |
-registration_path(resource_name), :html => { :method => :put, |
-:multipart => true }) do |f| |
-  = devise_error_messages!
-  .field
-    = render :partial => "devise/shared/form", :locals => { :f => f }
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
-    %br/
-    = f.password_field :current_password
-    = f.submit "Update"
-%h3 Cancel my account
-Unhappy? #{link_to "Cancel my account", |
-registration_path(resource_name), :confirm => |
-"Are you sure?", :method => :delete} |
-= link_to "Back", :back
-
+%h1 Brainstormer
+.block
+  %h2
+    Edit #{resource_name.to_s.humanize}
+  .content
+    .flash
+      - flash.each do |type, message|
+        %div{ :class => "message #{type}" }
+          %p= message
+      
+    = form_for(resource, :as => resource_name, :url => |
+    registration_path(resource_name), :html => { :method => :put, |
+    :multipart => true }) do |f| |
+      = render :partial => "devise/shared/form", :locals => { :f => f }
+      .group
+        = f.label :current_password, t("activerecord.attributes.user.password", :default => "Current Password"), :class => :label
+        %i (we need your current password to confirm your changes)
+        %br/
+        = f.password_field :current_password, :class => "text_field"
+      .group.navform.wat-cf
+        %button.button{:type => "submit"}
+          = image_tag("web-app-theme/icons/tick.png", :alt => "#{t("web-app-theme.save", :default => "Update")}")
+          = t("web-app-theme.save", :default => "Update")
+ 
+      
+    %h3 Cancel my account
+    Unhappy? #{link_to "Cancel my account", |
+    registration_path(resource_name), :confirm => |
+    "Are you sure?", :method => :delete} |
+    = link_to "Back", :back

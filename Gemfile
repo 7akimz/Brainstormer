@@ -31,9 +31,11 @@ group :development do
   gem "faker"
 end
 
-#group :development, :test do
-  #gem 'web-app-theme', '>= 0.6.2'
-#end
+group :development, :test do
+  gem 'ruby_parser'
+  gem 'hpricot'
+  gem 'web-app-theme', '>= 0.6.2'
+end
 
 # Use unicorn as the web server
 # gem 'unicorn'

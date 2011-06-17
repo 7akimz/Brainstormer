@@ -3,7 +3,7 @@ class CreateProjects < ActiveRecord::Migration
     create_table :projects do |t|
       t.string :name
       t.string :address
-      t.integer :client_id
+      t.references :client
       t.text :description
       t.decimal :budget, :default => 100.00
       t.text :side_notes

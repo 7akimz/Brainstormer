@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
 
   before_filter :get_post, :except => [:index, :create]
   before_filter :authorized_user, :only => [:destroy, :create]
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:destroy, :create]
   after_filter :add_members, :only => :create
 
   # Pre-conditions : User must be signed in
@@ -66,20 +66,6 @@ class TeamsController < ApplicationController
     # an instance of Team
     def get_post
       @team = params[:id].present? ? Team.find(params[:id]) : Team.new
-    end
-    # Redirect to the home page if the user is not
-    # authorized
-    def authorized_user
-      redirect_to root_path unless has_privilege?
-    end
-    # Check if the user has privilege. Users the have
-    # privilege are the managers and team leaders
-    def has_privilege?
-      if user_signed_in?
-        current_user.role == 2 || current_user.role == 4
-      else
-        return false
-      end
     end
 
     def add_members

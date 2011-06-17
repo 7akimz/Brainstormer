@@ -8,10 +8,9 @@ class Project < ActiveRecord::Base
   # Project assoication with the Team model through the join table
   # assignments
   has_many :assignments
-  has_many :teams, :through => :assignments
+  has_many :teams, :through => :assignments, :uniq => true
 
-  # Setup accessible (or protected) attributes for your model
-
+  # Setup accessible (or protected) attributes for the model
   attr_accessible :name, :description, :budget, :address, 
                   :side_notes, :start_date, :due
 
@@ -33,4 +32,5 @@ class Project < ActiveRecord::Base
   # Find all the projects where the due date is greater
   # the Date today
   scope :finished_projects, where("due > #{Date.today}")
+
 end

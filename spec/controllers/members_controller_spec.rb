@@ -34,6 +34,7 @@ describe MembersController do
       end
     end
   end
+
   describe "DELETE 'destroy'" do
 
     describe "for signed in with privilege" do

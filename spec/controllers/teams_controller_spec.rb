@@ -119,7 +119,7 @@ describe TeamsController do
                              :email => "not_signed_team@team.com",
                              :name => "not signed in")
         post :create, :team => team.attributes
-        response.should redirect_to(root_path)
+        response.should redirect_to(new_user_session_path)
       end
     end
 
@@ -242,7 +242,7 @@ describe TeamsController do
     describe "when user not signed in" do
       it 'should deny access' do
         delete :destroy, :id => @team
-        response.should redirect_to(root_path)
+        response.should redirect_to(new_user_session_path)
       end
     end
 

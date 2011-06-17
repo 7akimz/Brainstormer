@@ -1,50 +1,50 @@
-= f.label :image
-= f.file_field :image
-= f.hidden_field :image_cache
-%br
-%br
-= f.label :name
-%br
-= f.text_field :name
-%br
-= f.label :email
-%br
-= f.email_field :email
-%br
-= f.label :username
-%br
-= f.text_field :username
-%br
-= f.label :password
-%br
-= f.password_field :password
-%br
-= f.label :password_confirmation
-%br
-= f.password_field :password_confirmation
-%br
-= f.label :mobile_number
-%br
-= f.text_field :mobile_number
-%br
-= f.label :address
-%br
-= f.text_field :address
-%br
-= f.label :spoken_language
-%br
-= f.collection_select :spoken_language,     |
-  User.collection_name_options("language"), |
-  :first, :last                             |
-%br
-= f.label :country
-%br
-= f.collection_select :country,            |
-  User.collection_name_options("country"), |
-  :first, :last                            |
-%br
-= f.label :role
-%br
-= f.collection_select :role,            |
-  User.collection_name_options("role"), |
-  :first, :last                         |
+.group
+  = f.label :image, t("activerecord.attributes.project.image", :default => "Image"), :class => :label
+  = f.file_field :image, :class => "text_field"
+  = f.hidden_field :image_cache
+.group
+  = f.label :name, t("activerecord.attributes.user.name", :default => "Name"), :class => :label
+  = f.text_field :name, :class => "text_field"
+  %span.description Ex: a simple text
+.group
+  = f.label :email, t("activerecord.attributes.user.email", :default => "Email"), :class => :label
+  = f.email_field :email, :class => "text_field"
+  %span.description Ex: a simple text
+.group
+  = f.label :username, t("activerecord.attributes.user.username", :default => "Username"), :class => :label
+  = f.text_field :username, :class => "text_field"
+  %span.description Ex: a simple text
+.group
+  = f.label :password, t("activerecord.attributes.user.password", :default => "Password"), :class => :label
+  = f.password_field :password, :class => "text_field"
+  %span.description Ex: a simple text
+.group
+  = f.label :password_confirmation, t("activerecord.attributes.project.password", :default => "Name"), :class => :label
+  = f.password_field :password_confirmation, :class => "text_field"
+  %span.description Ex: a simple text
+.group
+  = f.label :mobile_number, t("activerecord.attributes.user.mobile_number", :default => "Mobile Number"), :class => :label
+  = f.text_field :mobile_number, :class => "text_field"
+  %span.description Ex: a simple text
+.group
+  = f.label :address, t("activerecord.attributes.user.address", :default => "Address"), :class => :label
+  = f.text_field :address, :class => "text_field"
+  %span.description Ex: a simple text
+.group
+  = f.label :spoken_language, t("activerecord.attributes.user.spoken_lanuage", :default => "Spoke Lanuage"), :class => :label
+  = f.collection_select :spoken_language,     |
+    User.collection_name_options("language"), |
+    :first, :last                             |
+  %span.description Ex: a simple text
+.group
+  = f.label :country, t("activerecord.attributes.country.name", :default => "Country"), :class => :label
+  = f.collection_select :country,            |
+    User.collection_name_options("country"), |
+    :first, :last                            |
+  %span.description Ex: a simple text
+.group
+  = f.label :role, t("activerecord.attributes.user.role", :default => "Role"), :class => :label
+  = f.collection_select :role,            |
+    User.collection_name_options("role"), |
+    :first, :last                         |
+  %span.description Ex: a simple text

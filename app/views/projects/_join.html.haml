@@ -1,0 +1,5 @@
+= form_for current_team.assignments.build(:project_id => @project.id), :remote => true do |f|
+  = f.hidden_field :project_id
+  %button.button{:type => "submit"}
+    = image_tag("web-app-theme/icons/tick.png", :alt => "#{t("web-app-theme.save", :default => "Join Project")}")
+    = t("web-app-theme.save", :default => "Join Project")

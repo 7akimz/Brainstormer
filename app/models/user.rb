@@ -126,22 +126,20 @@ class User < ActiveRecord::Base
   def unfollow!(followed)
     self.relationships.find_by_followed_id(followed).destroy
   end
-
+  
+  # Check if a user is a found in the member table
   def is_member_of?(team)
     Member.find_by_user_id_and_team_id(self.id, team.id)
   end
 
+  # Create a new table entry between a team and a user
   def want_to_join!(team)
-    unless(Member.find_by_user_id_and_team_id(self.id, team.id))
-      self.teams << team
-    end
+    self.teams << team unless is_member_of?(team)
   end
 
+  # Delete an entry from member table between a team and user
   def want_to_leave!(team)
-    associate = Member.find_by_user_id_and_team_id(self.id, team)
-    if associate
-      self.teams.delete(team)
-    end
+    self.teams.delete(team) if is_member_of?(team)
   end
 
 end

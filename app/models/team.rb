@@ -5,8 +5,8 @@ class Team < ActiveRecord::Base
 
   # Team association which links the Team model 
   # with the Project model
-  has_many :assignments
-  has_many :projects, :through => :assignments
+  has_many :assignments, :dependent => :destroy
+  has_many :projects, :through => :assignments, :uniq => true
 
   # String values for the role instead of the integers values
   TEAM_ROLE = {
@@ -46,5 +46,18 @@ class Team < ActiveRecord::Base
   def self.role_name_options
     TEAM_ROLE.to_a.sort
   end
+
+  def is_assigned_to?(project)
+    Assignment.find_by_team_id_and_project_id(self.id, project.id)
+  end
+
+  def assign_to!(project)
+    self.projects << project unless is_assigned_to?(project)
+  end
+
+  def unassign_from!(project)
+    self.projects.delete(project) if is_assigned_to?(project)
+  end
+
 
 end

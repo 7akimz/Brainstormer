@@ -1,0 +1,58 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first= link_to "#{t("web-app-theme.list", :default => "List")}", projects_path
+      %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_project_path
+      %li.active= link_to "#{t("web-app-theme.show", :default => "Show")}", project_path
+  .content
+    .inner
+      %p
+        %b
+          = t("activerecord.attributes.project.name", :default => t("activerecord.labels.name", :default => "Name"))
+          \:
+        = @project.name
+      %p
+        %b
+          = t("activerecord.attributes.project.address", :default => t("activerecord.labels.address", :default => "Address"))
+          \:
+        = @project.address
+      %p
+        %b
+          = t("activerecord.attributes.project.client_id", :default => t("activerecord.labels.client_id", :default => "Client"))
+          \:
+        = @project.client_id
+      %p
+        %b
+          = t("activerecord.attributes.project.description", :default => t("activerecord.labels.description", :default => "Description"))
+          \:
+        = @project.description
+      %p
+        %b
+          = t("activerecord.attributes.project.budget", :default => t("activerecord.labels.budget", :default => "Budget"))
+          \:
+        = @project.budget
+      %p
+        %b
+          = t("activerecord.attributes.project.side_notes", :default => t("activerecord.labels.side_notes", :default => "Side notes"))
+          \:
+        = @project.side_notes
+      %p
+        %b
+          = t("activerecord.attributes.project.finished", :default => t("activerecord.labels.finished", :default => "Finished"))
+          \:
+        = @project.finished
+      %p
+        %b
+          = t("activerecord.attributes.project.start_date", :default => t("activerecord.labels.start_date", :default => "Start date"))
+          \:
+        = @project.start_date
+      %p
+        %b
+          = t("activerecord.attributes.project.due", :default => t("activerecord.labels.due", :default => "Due"))
+          \:
+        = @project.due
+      .wat-cf
+        = link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_project_path(@project), :class => "button"
+        = link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), project_path(@project), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"
+        = render 'join_form' if team_present?
+- content_for :sidebar, render(:partial => 'sidebar')

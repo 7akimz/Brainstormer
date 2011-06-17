@@ -1,21 +1,26 @@
-%table
-  %tr
-    %td.main
-
-      - unless @users.empty?
-        %ul.users
-          = render @users
-    %td.sidebar
-      %strong 
-        Name
-        = @user.name
-      %strong
-        URI
-        = link_to user_path(@user), @user
-      %strong
-        Posts
-        = @user.posts.count
-      = render 'shared/status'
-      - unless @users.empty?
-        - @users.each do |user|
-          = link_to carrierwave_tag(user), user
+.block
+  %table
+    %tr
+      %td.main
+        - unless @users.empty?
+          %ul.users
+            = render @users
+    .block
+      %td.user_sidebar
+        %strong 
+          Name
+          = @user.name
+        %br
+        %strong
+          URI
+          = link_to user_path(@user), @user
+        %br
+        %strong
+          Posts
+          = @user.posts.count
+        %br
+        = render 'shared/status'
+        .content
+          - unless @users.empty?
+            - @users.each do |user|
+              = link_to carrierwave_tag(user), user

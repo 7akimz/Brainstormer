@@ -1,12 +1,21 @@
-%h2 Sign up
-= form_for(resource, :as => resource_name, :url => |
-  registration_path(resource_name), :html => |
-  {:multipart => true}) do |f|  |
-  = devise_error_messages!
-  .field
-    = render :partial => "devise/shared/form", :locals => { :f => f } 
-  %br
-  = f.submit "Sign up"
-%hr
-= render :partial => "devise/shared/links"
+%h1 Brainstormer
+.block#block-signup
+  %h2 Sign up
+  .content
+    .flash
+      - flash.each do |type, message|
+        %div{ :class => "message #{type}" }
+          %p= message
+
+    = form_for(resource, :as => resource_name, :url => |
+    registration_path(resource_name), :html => |
+    {:multipart => true}) do |f|  |
+      = render :partial => "devise/shared/form", :locals => { :f => f } 
+    .group.navform.wat-cf 
+      %button.button{:type => "submit"}
+        = image_tag("web-app-theme/icons/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}")
+        = t("web-app-theme.save", :default => "Sign Up")
+ 
+          
+    = render :partial => "devise/shared/links"
 

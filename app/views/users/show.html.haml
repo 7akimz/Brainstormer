@@ -1,22 +1,62 @@
-%table.profile
-  %td.main
-    %h1
-      = carrierwave_tag(@user)
-      = @user.name
-    - unless @user.posts.empty?
-      %table.posts 
-        = render @posts
-    = render 'follow_form' if user_signed_in? 
-  .sidebar
-    %strong
-      Name: 
-      = @user.name 
-    %br
-    %strong 
-      URI:
-      = link_to user_path(@user), @user
-    %br
-    %strong
-      Posts
-      = @user.posts.count
-    = render 'shared/status'
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first= link_to "#{t("web-app-theme.list", :default => "List")}", users_path
+      %li.active= link_to "#{t("web-app-theme.show", :default => "Show")}", user_path
+  .content
+    .inner
+      %p
+        %b 
+          = carrierwave_tag(@user, "small")
+      %p
+        %b
+          = t("activerecord.attributes.user.name", :default => t("activerecord.labels.name", :default => "Name"))
+          \:
+        = @user.name
+      %p
+        %b
+          = t("activerecord.attributes.user.email", :default => t("activerecord.labels.email", :default => "Email"))
+          \:
+        = @user.email
+      %p
+        %b
+          = t("activerecord.attributes.user.address", :default => t("activerecord.labels.address", :default => "Address"))
+          \:
+        = @user.address
+      %p
+        %b
+          = t("activerecord.attributes.user.role", :default => t("activerecord.labels.role", :default => "Role"))
+          \:
+        = @user.user_role
+      %p
+        %b
+          = t("activerecord.attributes.user.username", :default => t("activerecord.labels.username", :default => "Username"))
+          \:
+        = @user.username
+      %p
+        %b
+          = t("activerecord.attributes.user.mobile_number", :default => t("activerecord.labels.mobile_number", :default => "Mobile number"))
+          \:
+        = @user.mobile_number
+      %p
+        %b
+          = t("activerecord.attributes.user.spoken_language", :default => t("activerecord.labels.spoken_language", :default => "Spoken language"))
+          \:
+        = @user.user_language
+      %p
+        %b
+          = t("activerecord.attributes.user.country", :default => t("activerecord.labels.country", :default => "Country"))
+          \:
+        = @user.user_country
+      
+      .wat-cf
+        = link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_user_path(@user), :class => "button"
+        = link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), user_path(@user), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"
+        = render 'follow_form' if user_signed_in?
+.block
+  .content
+    .inner
+      - unless @user.posts.empty?
+        %table.posts 
+          = render @posts
+- content_for :sidebar, render(:partial => 'sidebar')

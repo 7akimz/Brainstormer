@@ -1,0 +1,21 @@
+- @user ||= current_user
+.block.notice
+  %h3= @user.name 
+  .content
+    %p
+      %strong 
+        URI:
+        = link_to user_path(@user), @user
+      %br
+      %strong
+        Posts
+        = @user.posts.count
+      %br
+    = render 'shared/status' 
+.block
+  %h3 Links
+  %ul.navigation
+    %li
+      %a{:href => "#"} Link 1
+    %li
+      %a{:href => "#"} Link 2

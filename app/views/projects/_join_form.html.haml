@@ -1,0 +1,5 @@
+#join_form
+  - unless current_team.is_assigned_to?(@project)
+    = render 'join'
+  - else
+    = render 'leave'

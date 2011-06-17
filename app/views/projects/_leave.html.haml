@@ -1,0 +1,5 @@
+= form_for current_team.assignments.find_by_project_id(@project.id), |
+:html => { :method => :delete }, :remote => true do |f| |
+  %button.button{:type => "submit"}
+    = image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default => "Leave Project")}")
+    = t("web-app-theme.delete", :default => "Leave Project")
