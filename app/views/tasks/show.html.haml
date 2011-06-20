@@ -1,0 +1,52 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first= link_to "#{t("web-app-theme.list", :default => "List")}", project_tasks_path
+      %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_project_task_path
+      %li.active= link_to "#{t("web-app-theme.show", :default => "Show")}", project_task_path
+  .content
+    .inner
+      %p
+        %b
+          = t("activerecord.attributes.project_task.project_id", :default => t("activerecord.labels.project_id", :default => "Project"))
+          \:
+        = @task.project_id
+      %p
+        %b
+          = t("activerecord.attributes.project_task.name", :default => t("activerecord.labels.name", :default => "Name"))
+          \:
+        = @task.name
+      %p
+        %b
+          = t("activerecord.attributes.project_task.description", :default => t("activerecord.labels.description", :default => "Description"))
+          \:
+        = @task.description
+      %p
+        %b
+          = t("activerecord.attributes.project_task.priority", :default => t("activerecord.labels.priority", :default => "Priority"))
+          \:
+        = @task.priority
+      %p
+        %b
+          = t("activerecord.attributes.project_task.progress", :default => t("activerecord.labels.progress", :default => "Progress"))
+          \:
+        = @task.progress
+      %p
+        %b
+          = t("activerecord.attributes.project_task.start_date", :default => t("activerecord.labels.start_date", :default => "Start date"))
+          \:
+        = @task.start_date
+      %p
+        %b
+          = t("activerecord.attributes.project_task.due", :default => t("activerecord.labels.due", :default => "Due"))
+          \:
+        = @task.due
+      %p
+        %b
+          = t("activerecord.attributes.project_task.finished", :default => t("activerecord.labels.finished", :default => "Finished"))
+          \:
+        = @task.finished
+      .wat-cf
+        = link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_project_task_path(@task), :class => "button"
+        = link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), project_task_path(@task), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"
+- content_for :sidebar, render(:partial => 'sidebar')

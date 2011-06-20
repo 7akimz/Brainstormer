@@ -18,14 +18,10 @@ class TeamsController < ApplicationController
   end
 
   # Pre-conditions : User must be signed in
-  def new
-
-  end
+  def new; end
   
   # Pre-conditions : User must be signed in
-  def edit
-
-  end
+  def edit; end
 
   # Pre-conditions : User must be signed in
   # Post-conditions : New Team is created in the database

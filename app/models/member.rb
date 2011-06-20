@@ -1,7 +1,6 @@
 class Member < ActiveRecord::Base
   belongs_to :user
   belongs_to :team
-  belongs_to :company
 
   # Setup attributes that will be mass-assigned
   attr_accessible :team_id

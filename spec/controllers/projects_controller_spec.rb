@@ -24,7 +24,7 @@ describe ProjectsController do
         response.should redirect_to(new_user_session_path)
       end
 
-      it 'should not respond to show' do
+      it 'should not respond to index' do
         get :index
         response.should_not be_success
       end

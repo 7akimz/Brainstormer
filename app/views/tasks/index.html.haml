@@ -1,0 +1,33 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active= link_to "#{t("web-app-theme.list", :default => "List")}", project_tasks_path
+      %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_project_task_path
+  .content
+    %h2.title
+      = t("web-app-theme.all", :default => "All")
+      Tasks
+    .inner
+      %table.table
+        %tr
+          %th.first ID
+          %th
+            = t("activerecord.attributes.project_task.project_id", :default => t("activerecord.labels.project_id", :default => "Project_id"))
+          %th= t("web-app-theme.created_at", :default => "Created at")
+          %th.last &nbsp;
+        - @tasks.each do |task|
+          %tr{:class => cycle("odd", "even")}
+            %td
+              = task.id
+            %td
+              = link_to task.project_id, project_task_path(task)
+            %td
+              = task.created_at
+            %td.last
+              = link_to "#{t("web-app-theme.show", :default => "Show")}", project_task_path(task)
+              |
+              \#{link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_project_task_path(task)} |
+              \#{link_to "#{t("web-app-theme.delete", :default => "Delete")}", project_task_path(task), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"}
+      .actions-bar.wat-cf
+        .actions
+- content_for :sidebar, render(:partial => 'sidebar')

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110615162531) do
+ActiveRecord::Schema.define(:version => 20110618233635) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "team_id"
@@ -24,14 +24,15 @@ ActiveRecord::Schema.define(:version => 20110615162531) do
   add_index "assignments", ["project_id"], :name => "index_assignments_on_project_id"
   add_index "assignments", ["team_id"], :name => "index_assignments_on_team_id"
 
-  create_table "clients", :force => true do |t|
+  create_table "comments", :force => true do |t|
+    t.integer  "task_id"
     t.string   "name"
-    t.string   "email"
-    t.string   "contact"
-    t.string   "address"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "comments", ["task_id"], :name => "index_comments_on_task_id"
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -51,12 +52,10 @@ ActiveRecord::Schema.define(:version => 20110615162531) do
   create_table "members", :force => true do |t|
     t.integer  "user_id"
     t.integer  "team_id"
-    t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "members", ["company_id"], :name => "index_members_on_company_id"
   add_index "members", ["team_id"], :name => "index_members_on_team_id"
   add_index "members", ["user_id"], :name => "index_members_on_user_id"
 
@@ -98,16 +97,19 @@ ActiveRecord::Schema.define(:version => 20110615162531) do
 
   create_table "tasks", :force => true do |t|
     t.integer  "project_id"
-    t.integer  "priority"
-    t.decimal  "progress"
     t.string   "name"
     t.text     "description"
-    t.boolean  "finished",    :default => false
+    t.integer  "priority"
+    t.decimal  "progress"
     t.datetime "start_date"
     t.datetime "due"
+    t.boolean  "finished",    :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "tasks", ["name"], :name => "index_tasks_on_name", :unique => true
+  add_index "tasks", ["project_id"], :name => "index_tasks_on_project_id"
 
   create_table "teams", :force => true do |t|
     t.string   "name"
@@ -147,5 +149,15 @@ ActiveRecord::Schema.define(:version => 20110615162531) do
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "workers", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "team_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "workers", ["company_id"], :name => "index_workers_on_company_id"
+  add_index "workers", ["team_id"], :name => "index_workers_on_team_id"
 
 end

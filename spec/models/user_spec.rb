@@ -22,7 +22,6 @@ describe User do
 
     it 'should require an email' do
       user = Factory.build(:user, :email => "")
-      #user = User.new(@user.merge(:email => ""))
       user.should_not be_valid
     end
 

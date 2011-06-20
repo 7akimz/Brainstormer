@@ -25,8 +25,9 @@ class User < ActiveRecord::Base
     0 => "Analyst",
     1 => "Developer",
     2 => "Manager",
-    3 => "Software Engineer",
-    4 => "Team Leader"
+    3 => "Regular User",
+    4 => "Software Engineer",
+    5 => "Team Leader"
   }
 
   USER_COUNTRY = {
@@ -63,7 +64,7 @@ class User < ActiveRecord::Base
                                :exclusion => { :in => %w(admin 
                                  superuser webmaster) }
 
-  validates :role,             :inclusion => { :in => 0..4 }
+  validates :role,             :inclusion => { :in => 0..5 }
 
   validates :country,          :inclusion => { :in => 0..4 }
 
@@ -72,7 +73,7 @@ class User < ActiveRecord::Base
   validates :mobile_number,    :numericality => true,
                                :if => :mobile_present?
   
-  scope :privileged, where(:role => "2", :role => "4")
+  scope :privileged, where(:role => "2", :role => "5")
   # Check if the mobile number is present
   def mobile_present?
     !mobile_number.nil?

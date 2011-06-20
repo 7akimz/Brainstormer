@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
     # privilege are the managers and team leaders
     def has_privilege?
       if user_signed_in?
-        current_user.role == 2 || current_user.role == 4
+        current_user.role == 2 || current_user.role == 5
       else
         flash[:alert] = "You don't have the privilege"
         return redirect_to new_user_session_path

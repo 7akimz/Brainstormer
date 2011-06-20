@@ -7,7 +7,7 @@ module TeamsHelper
   end
 
   def authorized_user?(user)
-    user.role == 4 || user.role == 2
+    user.role == 5 || user.role == 2
   end
 
 end

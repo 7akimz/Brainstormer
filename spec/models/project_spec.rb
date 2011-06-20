@@ -25,6 +25,7 @@ describe Project do
     it 'should have a team' do
       @project.should respond_to(:teams)
     end
+
     context "validations" do
     
       it 'should require a name' do

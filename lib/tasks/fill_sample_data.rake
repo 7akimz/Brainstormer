@@ -7,6 +7,8 @@ namespace :db do
     fill_users
     fill_posts
     fill_relationships
+    fill_teams
+    fill_projects
   end
 end
 
@@ -58,4 +60,39 @@ def fill_relationships
   followers = users[5..25]
   following.each { |followed| user.follow!(followed) }
   followers.each { |follower| follower.follow!(user) }
+end
+
+def fill_teams
+  User.all(:limit => 15).each do |user|
+    1.times do |t|
+      name = "#{user.username}-team" 
+      email = "#{user.username}_team_#{t}@example.com"
+      team = Team.create!(
+        :name => name,
+        :role => 3,
+        :email => email
+      )
+      user.want_to_join!(team)
+    end
+  end
+end
+
+def fill_projects
+  Team.all.each do |team|
+    4.times do |p|
+      name = "#{team.name}_project #{p}"
+      budget = 100 * p
+      description = "very very long project #{p}"
+      address = "building #{p}"
+      project = Project.create!(
+        :name => name,
+        :description => description,
+        :budget => budget,
+        :address => address,
+        :start_date => 1.week.ago,
+        :due => Date.today
+      )
+      team.assign_to!(project)
+    end
+  end
 end

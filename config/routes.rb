@@ -1,9 +1,12 @@
 Brainstormer::Application.routes.draw do
 
   devise_for :users
+
   match 'users/my_teams' => "users#my_teams",
     :as => :myteams
-  resources :users, :only => [:show, :index]
+
+  resources :users, :only => [:show, :index, :destroy]
+
   resources :users do
      member do
        get :following, :followers
@@ -15,8 +18,16 @@ Brainstormer::Application.routes.draw do
   resources :members, :only => [:create, :destroy]
   resources :assignments, :only => [:create, :destroy]
   resources :teams
-  resources :projects
 
+  resources :projects do
+    resources :tasks
+  end
+
+  resources :tasks do
+    resources :comments
+  end
+ 
+  
   root :to => "statics#index"
 
   # The priority is based upon order of creation:

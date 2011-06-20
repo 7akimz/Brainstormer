@@ -24,6 +24,15 @@ Factory.define :team do |t|
   t.email       "black_team@example.com"
 end
 
+Factory.define :company do |c|
+  c.sequence(:name) { |n| "company#{n}" }
+  c.sequence(:email) { |e| "company#{e}@company.com" }
+  c.telephone  "224015819"
+  c.country    1
+  c.address    "my company address"
+  c.capital    10000
+end
+
 Factory.define :client do |c|
   c.name    "client"
   c.email   "client@example.com"
@@ -32,15 +41,25 @@ Factory.define :client do |c|
 end
 
 Factory.define :project do |p|
-  p.name         "graduation"
+  p.sequence(:name) { |n| "graduation#{n}" }
   p.description  "an example of a description"
   p.address      "Egypt"
   p.budget       1000.0
   p.side_notes   "a side note example"
   p.finished     false
   p.start_date   1.week.ago
-  p.due          Time.now
+  p.due          Date.today
   p.association  :client
+end
+
+Factory.define :task do |t|
+  t.association :project
+  t.sequence(:name) { |n| "task#{n}" }
+  t.description "very long description"
+  t.priority    1
+  t.progress    25.0
+  t.start_date  2.days.ago
+  t.due         Date.today
 end
 
 Factory.define :member do |m|
@@ -51,6 +70,11 @@ end
 Factory.define :assignment do |a|
   a.association :team
   a.association :project
+end
+
+Factory.define :worker do |w|
+  w.association :team
+  w.association :company
 end
 
 Factory.define :post do |p|

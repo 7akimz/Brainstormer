@@ -55,32 +55,31 @@ describe PostsController do
     end
   end
 
-	describe "Delete 'destroy'" do
-		login_user
-		before(:each) do
-			another_user = Factory(:user, :email => "another@user.com", 
-														 :username => "another")
-			@post = Factory(:post, :user => another_user)
-		end
+  describe "Delete 'destroy'" do
+    login_user
+    before(:each) do
+      another_user = Factory(:user, :email => "another@user.com", 												 :username => "another")
+      @post = Factory(:post, :user => another_user)
+    end
 
-		it "should deny access" do
-			delete :destroy, :id => @post
-			response.should redirect_to(root_path)
-		end
+    it "should deny access" do
+      delete :destroy, :id => @post
+      response.should redirect_to(root_path)
+    end
 
-		describe " for authorized user" do
+   describe " for authorized user" do
 			
-			before(:each) do
-				@post = Factory(:post, :user => @user)
-			end			
+     before(:each) do
+       @post = Factory(:post, :user => @user)
+     end			
 
-			it "should destroy the post" do
-			  lambda do
-					delete :destroy, :id => @post
-				end.should change(Post, :count).by(-1)
-			end
-		end
+     it "should destroy the post" do
+       lambda do
+	 delete :destroy, :id => @post
+       end.should change(Post, :count).by(-1)
+      end
+    end
 
-	end
+  end
 end
 
