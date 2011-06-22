@@ -43,6 +43,7 @@ describe Company do
     end
 
     it 'should have a unique name' do
+      company1 = Factory(:company, :name => "company")
       company = Factory.build(:company, :name => "company")
       company.should_not be_valid
     end

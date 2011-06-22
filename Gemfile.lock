@@ -91,6 +91,7 @@ GEM
       rack (>= 1.0.0)
     rack-test (0.5.7)
       rack (>= 1.0)
+    railroady (1.0.2)
     rails (3.0.7)
       actionmailer (= 3.0.7)
       actionpack (= 3.0.7)
@@ -152,6 +153,7 @@ DEPENDENCIES
   haml
   hpricot
   jquery-rails
+  railroady
   rails
   rmagick
   rspec

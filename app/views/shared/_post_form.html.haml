@@ -1,4 +1,7 @@
 = form_for @post do |f|
+  - unless @post.errors.empty?
+    - @post.errors.full_messages.each do |msg|
+      = msg
   .field
     = f.text_area :content
   .actions

@@ -33,13 +33,6 @@ Factory.define :company do |c|
   c.capital    10000
 end
 
-Factory.define :client do |c|
-  c.name    "client"
-  c.email   "client@example.com"
-  c.contact "0105555555"
-  c.address "an example address"
-end
-
 Factory.define :project do |p|
   p.sequence(:name) { |n| "graduation#{n}" }
   p.description  "an example of a description"
@@ -49,7 +42,6 @@ Factory.define :project do |p|
   p.finished     false
   p.start_date   1.week.ago
   p.due          Date.today
-  p.association  :client
 end
 
 Factory.define :task do |t|
@@ -80,4 +72,10 @@ end
 Factory.define :post do |p|
   p.content     "Lorem example content preloaded in the...."
   p.association :user
+end
+
+Factory.define :comment do |c|
+  c.name        "comment"
+  c.description "new comment"
+  c.association :task
 end

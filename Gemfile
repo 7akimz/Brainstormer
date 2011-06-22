@@ -35,6 +35,7 @@ group :development, :test do
   gem 'ruby_parser'
   gem 'hpricot'
   gem 'web-app-theme', '>= 0.6.2'
+  gem 'railroady'
 end
 
 # Use unicorn as the web server

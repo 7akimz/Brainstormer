@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   respond_to :html, :js
 
-  before_filter :authenticate_user!, :except => [:show]
+  before_filter :authenticate_user!
   
   def index
     @users = User.all

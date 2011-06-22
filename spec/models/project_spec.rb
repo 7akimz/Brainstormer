@@ -34,8 +34,9 @@ describe Project do
       end
 
       it 'should have a unique name' do
-        @new_project = Factory.build(:project)
-        @new_project.should_not be_valid
+        project = Factory(:project, :name => "the project")
+        new_project = Factory.build(:project, :name => "the project")
+        new_project.should_not be_valid
       end
 
       it 'should require a description ' do

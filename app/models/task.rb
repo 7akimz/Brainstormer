@@ -1,5 +1,8 @@
 class Task < ActiveRecord::Base
 
+  # Task asscoiation with comment
+  has_many :comments, :dependent => :destroy
+
   # Task association with project
   belongs_to :project
 

@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController do
+class CommentsController < ApplicationController 
 
   respond_to :html
   

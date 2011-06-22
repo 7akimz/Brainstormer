@@ -163,7 +163,7 @@ describe Project::TasksController do
         post :create, :project_id => @project, 
                       :task => @task.attributes
         response.should redirect_to(project_task_path(
-          assigns(:task)))
+          assigns(:project), assigns(:task)))
       end
     end
   end
@@ -205,7 +205,8 @@ describe Project::TasksController do
       it 'should redirect to show page' do
         put :update, :project_id => @project, :id => @task,
                      :task => @attributes
-        response.should redirect_to(project_task_path(@task))
+        response.should redirect_to(project_task_path(
+          assigns(:project), assigns(:task)))
       end
     end
   end
