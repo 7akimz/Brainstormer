@@ -54,6 +54,12 @@
     </requirement>
     <requirement>
       <requirement>
+        <dependency name="event-calendar" version="0" bound="GREATER_OR_EQUAL" lib="event_calendar" git="false" path="false" doRequire="true" />
+      </requirement>
+      <source from="Gemfile" />
+    </requirement>
+    <requirement>
+      <requirement>
         <dependency name="factory_girl_rails" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
       <source from="Gemfile" />
@@ -208,6 +214,8 @@
     <orderEntry type="library" scope="PROVIDED" name="[gem] arel (v2.0.10, /Users/mohamed/.rvm/gems/ruby-1.9.2-p180@brainstormer/gems/arel-2.0.10)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] thor (v0.14.6, /Users/mohamed/.rvm/gems/ruby-1.9.2-p180@brainstormer/gems/thor-0.14.6)" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="[gem] bcrypt-ruby (v2.1.4, /Users/mohamed/.rvm/gems/ruby-1.9.2-p180@brainstormer/gems/bcrypt-ruby-2.1.4)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] railroady (v1.0.2, /Users/mohamed/.rvm/gems/ruby-1.9.2-p180@brainstormer/gems/railroady-1.0.2)" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="[gem] event-calendar (v2.3.3, /Users/mohamed/.rvm/gems/ruby-1.9.2-p180@brainstormer/gems/event-calendar-2.3.3)" level="application" />
   </component>
 </module>
 

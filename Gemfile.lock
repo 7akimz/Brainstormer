@@ -56,6 +56,7 @@ GEM
     erubis (2.6.6)
       abstract (>= 1.0.0)
     escape_utils (0.2.3)
+    event-calendar (2.3.3)
     eventmachine (0.12.10)
     factory_girl (1.3.3)
     factory_girl_rails (1.0.1)
@@ -147,6 +148,7 @@ DEPENDENCIES
   carrierwave
   cheat
   devise
+  event-calendar
   factory_girl_rails
   faker
   faye

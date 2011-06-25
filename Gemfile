@@ -12,6 +12,7 @@ gem 'devise'
 gem 'faye'
 gem 'carrierwave'
 gem 'rmagick'
+gem 'event-calendar', :require => 'event_calendar'
 # gem 'will_paginate'
 
 group :testing do

@@ -1,4 +1,5 @@
 class Team < ActiveRecord::Base
+  has_many :events, :dependent => :destroy
   # Team associations which link the Team model with the User model
   has_many :members, :dependent => :destroy
   has_many :users, :through => :members, :uniq => true
