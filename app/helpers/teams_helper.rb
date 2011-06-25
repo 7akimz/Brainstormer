@@ -6,9 +6,5 @@ module TeamsHelper
     return false unless authorized_user?(user)
   end
 
-  def authorized_user?(user)
-    user.role == 5 || user.role == 2
-  end
-
 end
 

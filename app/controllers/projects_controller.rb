@@ -2,18 +2,21 @@ class ProjectsController < ApplicationController
 
   respond_to :html
 
+  # Those filters is executed before actions
   before_filter :authenticate_user!
   before_filter :authorized_user, :only => [:new, :create, :destroy]
   before_filter :get_project, :except => [:index, :create]
+  # This filter is executed after an action execution
   after_filter  :assign_to_team, :only => [:create]
   
+  # Pre-conditions  : user must be logged in
+  # Post-conditions : All projects is displayed in 
+  # the index page of a projects
   def index
     @projects = Project.all
   end
 
-  def show
-    session["project_id"] = @project.id
-  end
+  def show; end
 
   def new;  end
 

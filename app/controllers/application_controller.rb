@@ -10,23 +10,22 @@ class ApplicationController < ActionController::Base
     redirect_to root_path unless has_privilege?
   end
 
-  #def team_present?
-    #if user_signed_in? 
-     # redirect_to root_path unless current_team
-    #else
-      #flash[:notice] = "You must be signed in"
-     # redirect_to new_user_session_path
-    #end
-  #end
+  # Redirect to home page unless a team is
+  # found
+  def check_team_presence
+    redirect_to root_path unless team_present?
+  end
 
+  # Check if the current team which return an instance 
+  # variable is not nil
   def team_present?
     !current_team.nil?
   end
 
-  def project_present?
-    !current_project.nil?
-  end
-
+  # If the instance variable @team contains the 
+  # team data leave it else get the team from 
+  # get_team method and assign it to @team instance 
+  # variable
   def current_team
     @team ||= get_team
   end
@@ -48,13 +47,10 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    # Find the team if the session that contains it ID
+    # was not nil
     def get_team
       Team.find(session["team_id"]) unless session["team_id"].nil?
-    end
-
-    def get_project
-      Project.find(session["project_id"]) unless session[
-      "project_id"].nil?
     end
 
 end

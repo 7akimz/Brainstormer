@@ -1,0 +1,5 @@
+= form_for current_team.workers.find_by_company_id(@company.id), |
+:html => { :method => :delete }, :remote => true do |f| |
+  %button.button{:type => "submit"}
+    = image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default => "Leave Company")}")
+    = t("web-app-theme.delete", :default => "Leave Company")

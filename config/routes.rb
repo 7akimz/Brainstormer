@@ -17,7 +17,9 @@ Brainstormer::Application.routes.draw do
   resources :relationships, :only => [:create, :destroy]
   resources :members, :only => [:create, :destroy]
   resources :assignments, :only => [:create, :destroy]
-  resources :teams
+  resources :workers, :only => [:create, :destroy]
+
+  resources :teams, :companies
 
   resources :projects do
     resources :tasks

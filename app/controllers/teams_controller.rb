@@ -2,9 +2,12 @@ class TeamsController < ApplicationController
 
   respond_to :html
 
+  # This fuctions is executed before executing the actions
   before_filter :get_post, :except => [:index, :create]
   before_filter :authorized_user, :only => [:destroy, :create]
   before_filter :authenticate_user!, :except => [:destroy, :create]
+
+  # This function is executed after executing the action
   after_filter :add_members, :only => :create
 
   # Pre-conditions : User must be signed in

@@ -1,0 +1,5 @@
+#join_form
+  - unless current_team.is_part_of?(@company)
+    = render 'join'
+  - else
+    = render 'leave'

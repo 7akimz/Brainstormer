@@ -9,5 +9,10 @@ module ApplicationHelper
   def same_user?(user)
     current_user == user
   end
+  
+  #check if user is a manager or team leader
+  def authorized_user?(user)
+    user.role == 5 || user.role == 2
+  end
 
 end
