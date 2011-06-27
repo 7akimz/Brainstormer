@@ -8,7 +8,7 @@ class TasksController < ApplicationController
 
   def index
     @tasks = @project.tasks
-    respond_with(:project, @task)
+    respond_with(@project, @tasks)
   end
 
   def show; end

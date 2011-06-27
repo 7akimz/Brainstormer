@@ -1,17 +1,30 @@
-%h1 
-  = @team.name
-%table.profile
-  %td.main
-    %strong
-      Name:
-      = @team.name
-    %br
-    %strong
-      Role:
-      = @team.team_role
-    %br
-    %strong
-      E-mail:
-      = @team.email
-    = render 'join_form' if user_signed_in?
-
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first= link_to "#{t("web-app-theme.list", :default => "List")}", teams_path
+      - unless privileged?(current_user)
+        %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_team_path
+      %li.active= link_to "#{t("web-app-theme.show", :default => "Show")}", team_path
+  .content
+    .inner
+      %p
+        %b
+          = t("activerecord.attributes.team.name", :default => t("activerecord.labels.name", :default => "Name"))
+          \:
+        = @team.name
+      %p
+        %b
+          = t("activerecord.attributes.team.email", :default => t("activerecord.labels.email", :default => "Email"))
+          \:
+        = @team.email
+      %p
+        %b
+          = t("activerecord.attributes.team.role", :default => t("activerecord.labels.role", :default => "Role"))
+          \:
+        = @team.team_role
+      .wat-cf
+        = render 'join_form' if user_signed_in?
+        - unless privileged?(current_user)
+          = link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_team_path(@team), :class => "button"
+          = link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), team_path(@team), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"
+- content_for :sidebar, render(:partial => 'sidebar')

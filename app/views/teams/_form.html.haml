@@ -1,14 +1,20 @@
-.field
-  = f.label :role
-  %br
+.group
+  = f.label :name, t("activerecord.attributes.team.name", :default => "Name"), :class => :label
+  = f.text_field :name, :class => 'text_field'
+  %span.description Ex: Developers Team
+.group
+  = f.label :email, t("activerecord.attributes.team.email", :default => "Email"), :class => :label
+  = f.text_field :email, :class => 'text_field'
+  %span.description Ex: team@example.com
+.group
+  = f.label :role, t("activerecord.attributes.team.role", :default => "Role"), :class => :label
   = f.collection_select :role, |
     Team.role_name_options,    |
-    :first, :last              |
-  %br
-  = f.label :name
-  %br
-  = f.text_field :name
-  %br
-  = f.label :email
-  %br
-  = f.email_field :email
+    :first, :last
+  %span.description Ex: Mixed Team
+.group.navform.wat-cf
+  %button.button{:type => "submit"}
+    = image_tag("web-app-theme/icons/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}")
+    = t("web-app-theme.save", :default => "Save")
+  %span.text_button_padding= t("web-app-theme.or", :default => "or")
+  = link_to t("web-app-theme.cancel", :default => "Cancel"), teams_path, :class => "text_button_padding link_button"

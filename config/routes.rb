@@ -1,12 +1,18 @@
 Brainstormer::Application.routes.draw do
 
-  match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
-  match '/calendar/teams(/:id)/events(/:id)' => 'team#events#show'
+  match '/calendar(/:year(/:month))' => 'calendar#index', 
+    :as => :calendar,
+    :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
+
+  #match '/teams(/:team_id)/events(/:id)' => 'events#show'
 
   devise_for :users
 
   match 'users/my_teams' => "users#my_teams",
     :as => :myteams
+  
+  match 'users/my_projects' => "users#my_projects",
+    :as => :myprojects
 
   resources :users, :only => [:show, :index, :destroy]
 
@@ -23,7 +29,7 @@ Brainstormer::Application.routes.draw do
   resources :workers, :only => [:create, :destroy]
 
   resources :teams do
-    resources :events, :except => [:index]
+    resources :events
   end
 
   resources :companies

@@ -4,7 +4,7 @@ class EventsController < ApplicationController
 
   before_filter :authenticate_user!
   before_filter :get_team
-  before_filter :get_event, :except => [:index, :create]
+  before_filter :get_event, :except => :create
 
   def index
     @events = @team.events

@@ -1,9 +1,12 @@
-= form_for(@team) do |f|
-  = render 'shared/error_messages', :object => f.object
-  %fieldset.new
-    %legend Team Registration 
-
-    = render 'form', :f => f
-
-    .actions
-      = f.submit "Create Team"
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first= link_to "#{t("web-app-theme.list", :default => "List")}", teams_path
+      %li.active= link_to "#{t("web-app-theme.new", :default => "New")}", new_team_path
+  .content
+    %h2.title
+      = t("web-app-theme.new", :default => "New")
+      Team
+    .inner
+      = form_for :team, :url => teams_path, :html => { :class => :form } do |f|
+        = render :partial => "form", :locals => {:f => f}

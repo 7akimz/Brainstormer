@@ -1,8 +1,33 @@
-%h1 List of Teams
-
-= render :partial => "team", :collection => @teams
-
-%br
-- unless privileged?(current_user)
-  = link_to 'New Team', new_team_path
-  = link_to 'Add Project', new_project_path
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active= link_to "#{t("web-app-theme.list", :default => "List")}", teams_path
+      - unless privileged?(current_user)
+        %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_team_path
+  .content
+    %h2.title
+      = t("web-app-theme.all", :default => "All")
+      Teams
+    .inner
+      %table.table
+        %tr
+          %th.first ID
+          %th
+            = t("activerecord.attributes.team.name", :default => t("activerecord.labels.name", :default => "Name"))
+          %th= t("web-app-theme.created_at", :default => "Created at")
+          %th.last &nbsp;
+        - @teams.each do |team|
+          %tr{:class => cycle("odd", "even")}
+            %td
+              = team.id
+            %td
+              = link_to team.name, team_path(team)
+            %td
+              = team.created_at
+            %td.last
+              = link_to "#{t("web-app-theme.show", :default => "Show")}", team_path(team)
+              - unless privileged?(current_user)
+                = link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_team_path(team)
+                = link_to "#{t("web-app-theme.delete", :default => "Delete")}", team_path(team), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"
+      .actions-bar.wat-cf
+        .actions

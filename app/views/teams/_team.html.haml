@@ -1,8 +1,0 @@
-%h2= team.name
-%i #{team.email}
-%hr
-= link_to 'show', team
-- unless privileged?(current_user)
-  = link_to 'Edit', edit_team_path(team)
-  = link_to 'Destroy', team, :confirm => 'Are you sure', |
-  :method => :delete |

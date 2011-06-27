@@ -20,14 +20,14 @@
             %td
               = task.id
             %td
-              = link_to task.project_id, project_task_path(task)
+              = link_to task.name, project_task_path(@project, task)
             %td
               = task.created_at
             %td.last
-              = link_to "#{t("web-app-theme.show", :default => "Show")}", project_task_path(task)
+              = link_to "#{t("web-app-theme.show", :default => "Show")}", project_task_path(@project, task)
               |
-              \#{link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_project_task_path(task)} |
-              \#{link_to "#{t("web-app-theme.delete", :default => "Delete")}", project_task_path(task), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"}
+              \#{link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_project_task_path(@project, task)} |
+              \#{link_to "#{t("web-app-theme.delete", :default => "Delete")}", project_task_path(@project, task), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"}
       .actions-bar.wat-cf
         .actions
 - content_for :sidebar, render(:partial => 'sidebar')
